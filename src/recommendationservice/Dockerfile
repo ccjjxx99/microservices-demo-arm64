@@ -30,7 +30,7 @@ RUN GRPC_HEALTH_PROBE_VERSION=v0.4.14 && \
 
 # get packages
 COPY requirements.txt .
-RUN pip install -r requirements.txt -i https://mirror.baidu.com/pypi/simple --trusted-host mirror.baidu.com
+RUN pip install -r requirements.txt
 
 FROM base as without-grpc-health-probe-bin
 # Enable unbuffered logging
