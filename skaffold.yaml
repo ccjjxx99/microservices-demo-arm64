@@ -17,6 +17,7 @@ kind: Config
 metadata:
   name: app
 build:
+  platforms: ["linux/arm64"]
   artifacts:
   # image tags are relative; to specify an image repo (e.g. GCR), you
   # must provide a "default repo" using one of the methods described
@@ -45,7 +46,9 @@ build:
   - image: adservice
     context: src/adservice
   tagPolicy:
-    gitCommit: {}
+    customTemplate:
+      template: "2.0-arm64"
+    # gitCommit: {}
   local:
     useBuildkit: false
 manifests:
