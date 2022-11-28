@@ -13,21 +13,30 @@
 # limitations under the License.
 
 FROM golang:1.19.3-alpine as builder
-RUN apk add --no-cache ca-certificates git
-RUN apk add build-base
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update && \
+    apk upgrade && \
+    apk add --no-cache ca-certificates git
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update && \
+    apk upgrade && \
+    apk add build-base
 WORKDIR /src
 
 # restore dependencies
 COPY go.mod go.sum ./
-RUN go mod download
+RUN go env -w GO111MODULE=on &&  go env -w GOPROXY=https://goproxy.cn,direct && go mod download
 COPY . .
 
 # Skaffold passes in debug-oriented compiler flags
 ARG SKAFFOLD_GO_GCFLAGS
-RUN go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /go/bin/shippingservice .
+RUN go env -w GO111MODULE=on &&  go env -w GOPROXY=https://goproxy.cn,direct && go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /go/bin/shippingservice .
 
 FROM alpine:3.17.0 as without-grpc-health-probe-bin
-RUN apk add --no-cache ca-certificates
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update && \
+    apk upgrade && \
+    apk add --no-cache ca-certificates
 
 WORKDIR /src
 COPY --from=builder /go/bin/shippingservice /src/shippingservice
@@ -43,5 +52,5 @@ ENTRYPOINT ["/src/shippingservice"]
 
 FROM without-grpc-health-probe-bin
 RUN GRPC_HEALTH_PROBE_VERSION=v0.4.14 && \
-    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 && \
+    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-arm64 && \
     chmod +x /bin/grpc_health_probe
