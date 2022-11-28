@@ -17,7 +17,7 @@ FROM python:3.9.15-slim as base
 FROM base as builder
 
 RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
-    && apt-get -qq update \
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
         g++
 
