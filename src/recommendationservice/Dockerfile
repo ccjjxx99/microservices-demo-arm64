@@ -16,19 +16,20 @@ FROM python:3.9.15-slim as base
 
 FROM base as builder
 
-RUN apt-get -qq update \
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+    && apt-get -qq update \
     && apt-get install -y --no-install-recommends \
         wget g++ \
     && rm -rf /var/lib/apt/lists/*
 
 # download the grpc health probe
 RUN GRPC_HEALTH_PROBE_VERSION=v0.4.14 && \
-    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 && \
+    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-arm64 && \
     chmod +x /bin/grpc_health_probe
 
 # get packages
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
 
 FROM base as without-grpc-health-probe-bin
 # Enable unbuffered logging
