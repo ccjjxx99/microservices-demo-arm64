@@ -13,21 +13,30 @@
 # limitations under the License.
 
 FROM golang:1.19.3-alpine as builder
-RUN apk add --no-cache ca-certificates git
-RUN apk add build-base
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update && \
+    apk upgrade && \
+    apk add --no-cache ca-certificates git
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update && \
+    apk upgrade && \
+    apk add build-base
 WORKDIR /src
 
 # restore dependencies
 COPY go.mod go.sum ./
-RUN go mod download
+RUN go env -w GO111MODULE=on &&  go env -w GOPROXY=https://goproxy.cn,direct && go mod download
 COPY . .
 
 # Skaffold passes in debug-oriented compiler flags
 ARG SKAFFOLD_GO_GCFLAGS
-RUN go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /go/bin/frontend .
+RUN go env -w GO111MODULE=on &&  go env -w GOPROXY=https://goproxy.cn,direct && go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /go/bin/frontend .
 
 FROM alpine:3.17.0 as release
-RUN apk add --no-cache ca-certificates \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update && \
+    apk upgrade && \
+    apk add --no-cache ca-certificates \
     busybox-extras net-tools bind-tools
 WORKDIR /src
 COPY --from=builder /go/bin/frontend /src/server
