@@ -20,7 +20,7 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
     && sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
-        wget g++  gcc python3-dev \
+        wget g++ \
     && rm -rf /var/lib/apt/lists/*
 
 # download the grpc health probe
