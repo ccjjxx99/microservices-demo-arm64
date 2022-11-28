@@ -6,8 +6,10 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
     mavenLocal()
+    maven { url 'http://maven.aliyun.com/repository/central' }
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 }
 
 description = 'Ad Service'
