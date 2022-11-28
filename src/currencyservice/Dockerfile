@@ -18,7 +18,10 @@ FROM base as builder
 
 # Some packages (e.g. @google-cloud/profiler) require additional
 # deps for post-install scripts
-RUN apk add --update --no-cache \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update && \
+    apk upgrade && \
+    apk add --update --no-cache \
     python3 \
     make \
     g++
@@ -27,7 +30,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=production
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org && cnpm install --only=production
 
 FROM base as without-grpc-health-probe-bin
 
@@ -44,5 +47,5 @@ ENTRYPOINT [ "node", "server.js" ]
 FROM without-grpc-health-probe-bin
 
 RUN GRPC_HEALTH_PROBE_VERSION=v0.4.14 && \
-    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 && \
+    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-arm64 && \
     chmod +x /bin/grpc_health_probe
