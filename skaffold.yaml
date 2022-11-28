@@ -43,8 +43,8 @@ build:
       dockerfile: Dockerfile
   - image: frontend
     context: src/frontend
-  - image: adservice
-    context: src/adservice
+  # - image: adservice
+  #   context: src/adservice
   tagPolicy:
     customTemplate:
       template: "2.0-arm64"
