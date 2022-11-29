@@ -31,6 +31,8 @@ spec:
       labels:
         app: emailservice
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -47,7 +49,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/emailservice:v0.4.2
+        image: ccjjxx99/emailservice:v0.4.2-amd64
         ports:
         - containerPort: 8080
         env:
@@ -97,6 +99,8 @@ spec:
       labels:
         app: checkoutservice
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       securityContext:
         fsGroup: 1000
@@ -112,7 +116,7 @@ spec:
                 - all
             privileged: false
             readOnlyRootFilesystem: true
-          image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.4.2
+          image: ccjjxx99/checkoutservice:v0.4.2-amd64
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -172,6 +176,8 @@ spec:
       labels:
         app: recommendationservice
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -188,7 +194,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.4.2
+        image: ccjjxx99/recommendationservice:v0.4.2-amd64
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -271,6 +277,8 @@ spec:
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       securityContext:
         fsGroup: 1000
@@ -286,7 +294,7 @@ spec:
                 - all
             privileged: false
             readOnlyRootFilesystem: true
-          image: gcr.io/google-samples/microservices-demo/frontend:v0.4.2
+          image: ccjjxx99/frontend:v0.4.2-amd64
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -377,6 +385,8 @@ spec:
       labels:
         app: paymentservice
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -393,7 +403,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.4.2
+        image: ccjjxx99/paymentservice:v0.4.2-amd64
         ports:
         - containerPort: 50051
         env:
@@ -443,6 +453,8 @@ spec:
       labels:
         app: productcatalogservice
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -459,7 +471,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.4.2
+        image: ccjjxx99/productcatalogservice:v0.4.2-amd64
         ports:
         - containerPort: 3550
         env:
@@ -509,6 +521,8 @@ spec:
       labels:
         app: cartservice
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -525,7 +539,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/cartservice:v0.4.2
+        image: ccjjxx99/cartservice:v0.4.2-amd64
         ports:
         - containerPort: 7070
         env:
@@ -577,6 +591,8 @@ spec:
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       restartPolicy: Always
@@ -617,7 +633,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.4.2
+        image: ccjjxx99/loadgenerator:v0.4.2-amd64
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
@@ -644,6 +660,8 @@ spec:
       labels:
         app: currencyservice
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -660,7 +678,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.4.2
+        image: ccjjxx99/currencyservice:v0.4.2-amd64
         ports:
         - name: grpc
           containerPort: 7000
@@ -711,6 +729,8 @@ spec:
       labels:
         app: shippingservice
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       securityContext:
         fsGroup: 1000
@@ -726,7 +746,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.4.2
+        image: ccjjxx99/shippingservice:v0.4.2-amd64
         ports:
         - containerPort: 50051
         env:
@@ -775,6 +795,8 @@ spec:
       labels:
         app: redis-cart
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       securityContext:
         fsGroup: 1000
         runAsGroup: 1000
@@ -840,6 +862,8 @@ spec:
       labels:
         app: adservice
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -856,7 +880,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/adservice:v0.4.2
+        image: ccjjxx99/adservice:v0.4.2-amd64
         ports:
         - containerPort: 9555
         env:
