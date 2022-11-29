@@ -32,7 +32,7 @@ spec:
         app: emailservice
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -100,7 +100,7 @@ spec:
         app: checkoutservice
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       securityContext:
         fsGroup: 1000
@@ -177,7 +177,7 @@ spec:
         app: recommendationservice
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -278,7 +278,7 @@ spec:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       securityContext:
         fsGroup: 1000
@@ -387,7 +387,7 @@ spec:
         app: paymentservice
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -455,7 +455,7 @@ spec:
         app: productcatalogservice
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -523,7 +523,7 @@ spec:
         app: cartservice
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -593,7 +593,7 @@ spec:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       restartPolicy: Always
@@ -662,7 +662,7 @@ spec:
         app: currencyservice
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -731,7 +731,7 @@ spec:
         app: shippingservice
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       securityContext:
         fsGroup: 1000
@@ -797,7 +797,7 @@ spec:
         app: redis-cart
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       securityContext:
         fsGroup: 1000
         runAsGroup: 1000
@@ -864,7 +864,7 @@ spec:
         app: adservice
     spec:
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        kubernetes.io/arch: amd64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
