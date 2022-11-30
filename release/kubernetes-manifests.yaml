@@ -387,7 +387,7 @@ spec:
         app: paymentservice
     spec:
       nodeSelector:
-        kubernetes.io/arch: amd64
+        kubernetes.io/arch: arm64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -404,7 +404,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: ccjjxx99/paymentservice:v0.4.2-amd64
+        image: ccjjxx99/paymentservice:v0.4.2
         ports:
         - containerPort: 50051
         env:
@@ -455,7 +455,7 @@ spec:
         app: productcatalogservice
     spec:
       nodeSelector:
-        kubernetes.io/arch: amd64
+        kubernetes.io/arch: arm64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext:
@@ -472,7 +472,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: ccjjxx99/productcatalogservice:v0.4.2-amd64
+        image: ccjjxx99/productcatalogservice:v0.4.2
         ports:
         - containerPort: 3550
         env:
