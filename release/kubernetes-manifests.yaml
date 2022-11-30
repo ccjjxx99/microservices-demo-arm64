@@ -278,7 +278,7 @@ spec:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
       nodeSelector:
-        kubernetes.io/arch: amd64
+        kubernetes.io/arch: arm64
       serviceAccountName: default
       securityContext:
         fsGroup: 1000
@@ -294,7 +294,7 @@ spec:
                 - all
             privileged: false
             readOnlyRootFilesystem: true
-          image: ccjjxx99/frontend:v0.4.2-amd64
+          image: ccjjxx99/frontend:v0.4.2
           ports:
           - containerPort: 8080
           readinessProbe:
