@@ -593,7 +593,7 @@ spec:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
       nodeSelector:
-        kubernetes.io/arch: amd64
+        kubernetes.io/arch: arm64
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       restartPolicy: Always
@@ -634,7 +634,7 @@ spec:
               - all
           privileged: false
           readOnlyRootFilesystem: true
-        image: ccjjxx99/loadgenerator:v0.4.2-amd64
+        image: ccjjxx99/loadgenerator:v0.4.2
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
