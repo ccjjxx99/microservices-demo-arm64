@@ -108,7 +108,7 @@ build:
     context: src/loadgenerator
   tagPolicy:
     customTemplate:
-      template: "2.0-arm64"
+      template: "v0.4.2-arm64"
 manifests:
   rawYaml:
   - ./kubernetes-manifests/loadgenerator.yaml
